@@ -50,6 +50,38 @@
       </ion-list>
     </ion-row>
   </ion-card>
+  <ion-card>
+    <div id="homeCard" class="">
+      <ion-list class="inline_width">
+        <ion-item>
+        <ion-label >
+          <a href="javascript:void(0)" (click)="openGuest();" >G0001</a>
+        </ion-label>
+        </ion-item>
+        <ion-item>
+        <ion-label >Dasharath Bhukya</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label >Rs. 3200</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon [hidden]="!openPannel" ios="ios-arrow-dropdown" md="md-arrow-dropdown" (click)="openPan();" > </ion-icon>
+        <ion-icon [hidden]="openPannel" ios="ios-arrow-dropup" md="md-arrow-dropup" (click)="openPan();" > </ion-icon>
+      </ion-item>
+      </ion-list>
+    </div>
+    <ion-row [hidden]="openPannel">
+      <ion-list class="inline_width" radio-group [(ngModel)]="feePaid">
+        <ion-item>
+          <ion-radio value="paid"></ion-radio>
+          <ion-label>Paid</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-input  type="text" [(ngModel)]="amount" id="amount" name="amount" placeholder="amount"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-row>
+  </ion-card>
 
 
 

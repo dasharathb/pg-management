@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      New Guest
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+    	<ion-item>
+    		<ion-avatar>
+		      <img src="img/avatar-cher.png">
+		    </ion-avatar>
+    	</ion-item>
+    	<ion-item>
+    		<ion-input type="text" placeholder="first name..." 
+    		[(ngModel)]="fName" ></ion-input>
+    	</ion-item>
+    	<ion-item>
+    		<ion-input type="text" placeholder="last name..." 
+    		[(ngModel)]="lName" ></ion-input>
+    	</ion-item>
+    	<ion-item>
+    		<ion-input type="text" placeholder="address..." 
+    		[(ngModel)]="address" ></ion-input>
+    	</ion-item>
+    	<ion-item>
+    		<ion-input type="number" placeholder="pin..." 
+    		[(ngModel)]="pin" ></ion-input>
+    	</ion-item>
+
+    	<ion-item>
+    		<ion-input type="number" placeholder="aadhar no ..." 
+    		[(ngModel)]="aadharNo" ></ion-input>
+    	</ion-item>
+    	<ion-item>
+    		<ion-input type="number" placeholder="phone number..." 
+    		[(ngModel)]="phone" ></ion-input>
+    	</ion-item>
+    </ion-list>
+    
+    	<button ion-button>
+    		<ion-icon ios="ios-add" md="md-add"> 
+    		</ion-icon>
+    	</button>
+    
+</ion-content>
