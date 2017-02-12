@@ -1,4 +1,10 @@
 page-home {
+  .header{
+    background-color: #5165c6;
+  }
+  $colors: (
+    custom-color: #0277bd
+  );
   #feeDtl{
         font-size: 16px;
         font-weight: bold;

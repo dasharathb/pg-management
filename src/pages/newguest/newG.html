@@ -10,39 +10,79 @@
     <ion-list>
     	<ion-item>
     		<ion-avatar>
-		      <img src="img/avatar-cher.png">
+		      <img [src]="base64Image" *ngIf="base64Image" />
+          <a href="javascript:void(0);" (click)="takePicture()">Take Photo</a>
 		    </ion-avatar>
     	</ion-item>
     	<ion-item>
-    		<ion-input type="text" placeholder="first name..." 
+        <ion-label>Name:</ion-label>
+    		<ion-input type="text"
+    		[(ngModel)]="name" ></ion-input>
+    	</ion-item>
+    	<ion-item>
+        <ion-label>Father Name:</ion-label>
+    		<ion-input type="text"
     		[(ngModel)]="fName" ></ion-input>
     	</ion-item>
-    	<ion-item>
-    		<ion-input type="text" placeholder="last name..." 
-    		[(ngModel)]="lName" ></ion-input>
+      <ion-item>
+        <ion-label>Gender</ion-label>
+        <ion-select [(ngModel)]="gender">
+          <ion-option value="select" >--select--</ion-option>
+          <ion-option value="m">Male</ion-option>
+          <ion-option value="f">Female</ion-option>
+        </ion-select>
     	</ion-item>
     	<ion-item>
-    		<ion-input type="text" placeholder="address..." 
+    		<ion-input type="text" placeholder="address..."
     		[(ngModel)]="address" ></ion-input>
     	</ion-item>
     	<ion-item>
-    		<ion-input type="number" placeholder="pin..." 
+        <ion-label>PIN :</ion-label>
+    		<ion-input type="number"
     		[(ngModel)]="pin" ></ion-input>
     	</ion-item>
 
     	<ion-item>
-    		<ion-input type="number" placeholder="aadhar no ..." 
+        <ion-label>Aadhar #</ion-label>
+    		<ion-input type="number"
     		[(ngModel)]="aadharNo" ></ion-input>
     	</ion-item>
     	<ion-item>
-    		<ion-input type="number" placeholder="phone number..." 
+        <ion-label>Phone #</ion-label>
+    		<ion-input type="tel"  [attr.maxlength]="10"
     		[(ngModel)]="phone" ></ion-input>
     	</ion-item>
+      <ion-item>
+        <ion-label>Father Phone#</ion-label>
+    		<ion-input type="tel" id="fphone" [attr.maxlength]="10"
+    		[(ngModel)]="fphone"  ></ion-input>
+        <!-- (keyup)="checkPhoneNuber($event, fphone)" -->
+    	</ion-item>
+      <ion-item>
+        <ion-label>Occupation</ion-label>
+        <ion-select [(ngModel)]="occupation" >
+          <ion-option value="select" >--select--</ion-option>
+          <ion-option value="student">Student</ion-option>
+          <ion-option value="working">Working</ion-option>
+        </ion-select>
+    	</ion-item>
+      <ion-item *ngIf="occupation == 'student'">
+        <ion-label>College </ion-label>
+    		<ion-input type="text"
+    		[(ngModel)]="occName" ></ion-input>
+    	</ion-item>
+      <ion-item *ngIf="occupation == 'working'">
+        <ion-label>Organization </ion-label>
+    		<ion-input type="text"
+    		[(ngModel)]="occName" ></ion-input>
+    	</ion-item>
     </ion-list>
-    
+
+    <ion-item>
     	<button ion-button>
-    		<ion-icon ios="ios-add" md="md-add"> 
+    		<ion-icon ios="ios-add" md="md-add">
     		</ion-icon>
     	</button>
-    
+    </ion-item>
+
 </ion-content>
