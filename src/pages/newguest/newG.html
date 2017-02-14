@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="twitter">
     <ion-title>
       New Guest
     </ion-title>
@@ -7,11 +7,12 @@
 </ion-header>
 
 <ion-content padding>
+<div class="login-box">
     <ion-list>
     	<ion-item>
     		<ion-avatar>
-		      <img [src]="base64Image" *ngIf="base64Image" />
-          <a href="javascript:void(0);" (click)="takePicture()">Take Photo</a>
+		      <img [src]="base64Image" *ngIf="base64Image" width="100" height="100"/>
+			  <a href="javascript:void(0);" (click)="takePicture()">Take Photo</a>
 		    </ion-avatar>
     	</ion-item>
     	<ion-item>
@@ -77,12 +78,13 @@
     		[(ngModel)]="occName" ></ion-input>
     	</ion-item>
     </ion-list>
-
-    <ion-item>
-    	<button ion-button>
-    		<ion-icon ios="ios-add" md="md-add">
-    		</ion-icon>
-    	</button>
-    </ion-item>
-
+	<ion-list style="border: 1px solid #5165c6;">
+		<ion-item>
+			<button ion-button>
+				<ion-icon ios="ios-add" md="md-add">
+				</ion-icon>
+			</button>
+		</ion-item>
+	</ion-list>
+</div>
 </ion-content>

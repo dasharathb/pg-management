@@ -9,6 +9,7 @@ import { LoginPage } from '../login/login';
   templateUrl: 'newG.html'
 })
 export class NewGuest {
+	
   public base64Image: string;
   public name: string;
   public fName: string;
@@ -20,6 +21,7 @@ export class NewGuest {
   public fphone : number;
   public occupation : string = 'select';
   public occName : string;
+	//person = {base64Image: '', name: '', fName:'', gender:'',address:'',pin:'',aadharNo:'',phone:'',fphone:'',occupation:'',occName:''};
 
   username = '';
   email = '';
