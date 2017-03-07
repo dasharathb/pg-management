@@ -11,19 +11,20 @@ import { LoginPage } from '../login/login';
 })
 export class HomePage {
   openPannel: boolean = true;
+  openPannelName: string = '';
   username = '';
   email = '';
 
   constructor(public navCtrl: NavController, private auth: AuthService) {
       let info = this.auth.getUserInfo();
-console.log('info.....',info);
+      console.log('info.....',info);
       if(info == undefined){
         this.navCtrl.push(LoginPage);
       }else{
         this.username = info.name;
         this.email = info.email;
       }
-      
+
   }
 
   public logout() {
@@ -32,9 +33,10 @@ console.log('info.....',info);
     });
   }
 
-  openPan(){
-    //alert('123456');
+  openPan(pName){
+    //alert(pName);
     this.openPannel = !this.openPannel;
+    this.openPannelName = pName;
   }
 
 }

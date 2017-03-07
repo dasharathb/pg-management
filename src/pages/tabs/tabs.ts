@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { HomePage } from '../home/home';
 import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
+import { AllGuest } from '../allguest/allguest';
 import {NewGuest} from '../newguest/newG';
 
 @Component({
@@ -14,7 +14,7 @@ export class TabsPage {
   tab1Root: any = HomePage;
   tabNewG: any = NewGuest;
   tab2Root: any = AboutPage;
-  tab3Root: any = ContactPage;
+  tab3Root: any = AllGuest;
 
   constructor() {
 

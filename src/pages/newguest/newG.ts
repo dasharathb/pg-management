@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {Camera} from 'ionic-native';
 import { AuthService } from '../../providers/auth-service';
+import { GuestService } from '../../providers/guest-service';
 import { LoginPage } from '../login/login';
 
 @Component({
@@ -9,7 +10,7 @@ import { LoginPage } from '../login/login';
   templateUrl: 'newG.html'
 })
 export class NewGuest {
-	
+
   public base64Image: string;
   public name: string;
   public fName: string;
@@ -21,11 +22,11 @@ export class NewGuest {
   public fphone : number;
   public occupation : string = 'select';
   public occName : string;
-	//person = {base64Image: '', name: '', fName:'', gender:'',address:'',pin:'',aadharNo:'',phone:'',fphone:'',occupation:'',occName:''};
+	public person = {base64Image: '', name: '', fName:'', gender:'select',address:'',pin:'',aadharNo:'',phone:'',fphone:'',occupation:'select',occName:''};
 
   username = '';
   email = '';
-  constructor(public navCtrl: NavController, private auth: AuthService) {
+  constructor(public navCtrl: NavController, private auth: AuthService, private guestService: GuestService) {
       let info = this.auth.getUserInfo();
     console.log('info new guest.....',info);
     if(info == undefined){
@@ -54,10 +55,29 @@ export class NewGuest {
       targetHeight: 320,
       saveToPhotoAlbum: false*/
       // imageData is a base64 encoded string
-        this.base64Image = "data:image/jpeg;base64," + imageData;
+        this.person.base64Image = "data:image/jpeg;base64," + imageData;
     }, (err) => {
         console.log(err);
     });
+  }
+
+  addGuest(){
+    console.log('person details::::::',this.person);
+    this.guestService.registerGuest(this.person).subscribe(
+        data => {
+        	console.log('data ::::::',data);
+          /*  this.hallResult = data;
+            this.hallResult.forEach((hall) =>{  // foreach statement
+            	hall.image = this.sanitizer.bypassSecurityTrustStyle('url(' + hall.image + ')');
+            	console.log(" hall ::::=:"+hall.image);
+            })
+              */
+        },
+        err => {
+            console.log(err);
+        },
+        () => console.log('Search Complete')
+    );
   }
 
 }
