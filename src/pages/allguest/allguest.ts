@@ -48,6 +48,7 @@ public userPhone = '';
   }
 
   guestInfo(guestId){
+  console.log('guestId ::::::::::::::::::::::: ',guestId);
     this.navCtrl.push(Guest,{userPhone: this.userPhone, guestId: guestId});
   }
 
