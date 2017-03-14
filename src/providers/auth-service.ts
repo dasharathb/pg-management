@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -41,6 +41,12 @@ export class AuthService {
       return Observable.throw("Please insert credentials");
     } else {
       // At this point store the credentials to your backend!
+      var url = 'http://localhost:9080/pg-management/user/register';
+      let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
+      let options       = new RequestOptions({ headers: headers });
+      var response = this.http.post(url, JSON.stringify(credentials), options).map(res => res.json());
+      //return response;
+
       return Observable.create(observer => {
         observer.next(true);
         observer.complete();
