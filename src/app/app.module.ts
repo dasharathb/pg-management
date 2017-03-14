@@ -10,6 +10,8 @@ import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../providers/auth-service';
 import { GuestService } from '../providers/guest-service';
 import { RegisterPage } from '../pages/register/register';
+import { SuccessPage } from '../pages/success/success';
+import { Guest } from '../pages/guest-info/guest';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { RegisterPage } from '../pages/register/register';
     TabsPage,
     NewGuest,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    SuccessPage,
+    Guest
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -34,7 +38,9 @@ import { RegisterPage } from '../pages/register/register';
     TabsPage,
     NewGuest,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    SuccessPage,
+    Guest
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, GuestService]
 })

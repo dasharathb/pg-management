@@ -4,6 +4,7 @@ import {Camera} from 'ionic-native';
 import { AuthService } from '../../providers/auth-service';
 import { GuestService } from '../../providers/guest-service';
 import { LoginPage } from '../login/login';
+import { SuccessPage } from '../success/success';
 
 @Component({
   selector: 'new-guest',
@@ -14,18 +15,11 @@ export class NewGuest {
   public base64Image: string;
   public name: string;
   public fName: string;
-  public gender : string = 'select';
-  public address : string;
-  public pin : number;
-  public aadharNo : number;
-  public phone : number;
-  public fphone : number;
-  public occupation : string = 'select';
-  public occName : string;
-	public person = {base64Image: '', name: '', fName:'', gender:'select',address:'',pin:'',aadharNo:'',phone:'',fphone:'',occupation:'select',occName:''};
+	public person = {base64Image: '', name: '', fName:'', gender:'select',address:'',pin:'',aadharNo:'',phone:'',fphone:'',occupation:'select',occName:'',amount:0};
 
-  username = '';
-  email = '';
+  public username = '';
+  public email = '';
+  public userPhone = '';
   constructor(public navCtrl: NavController, private auth: AuthService, private guestService: GuestService) {
       let info = this.auth.getUserInfo();
     console.log('info new guest.....',info);
@@ -34,11 +28,12 @@ export class NewGuest {
     }else{
       this.username = info.name;
       this.email = info.email;
+      this.userPhone = info.phone;
     }
   }
   checkPhoneNuber(event, number){
   console.log('number..........',number.length);
-  console.log(this.fphone);
+
     if(number.length==10 && event.keyCode!=8)
       return false;
   }
@@ -62,16 +57,12 @@ export class NewGuest {
   }
 
   addGuest(){
-    console.log('person details::::::',this.person);
-    this.guestService.registerGuest(this.person).subscribe(
+    console.log(this.username,':::::::person details::::::',this.person);
+    this.guestService.registerGuest(this.person, this.userPhone).subscribe(
         data => {
         	console.log('data ::::::',data);
-          /*  this.hallResult = data;
-            this.hallResult.forEach((hall) =>{  // foreach statement
-            	hall.image = this.sanitizer.bypassSecurityTrustStyle('url(' + hall.image + ')');
-            	console.log(" hall ::::=:"+hall.image);
-            })
-              */
+          this.person = {base64Image: '', name: '', fName:'', gender:'select',address:'',pin:'',aadharNo:'',phone:'',fphone:'',occupation:'select',occName:'',amount:0};
+          this.navCtrl.push(SuccessPage,{guestId: data.id});
         },
         err => {
             console.log(err);

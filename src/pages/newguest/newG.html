@@ -70,12 +70,17 @@
       <ion-item *ngIf="person.occupation == 'student'">
         <ion-label>College </ion-label>
     		<ion-input type="text"
-    		[(ngModel)]="occName" ></ion-input>
+    		[(ngModel)]="person.occName" ></ion-input>
     	</ion-item>
       <ion-item *ngIf="person.occupation == 'working'">
         <ion-label>Organization </ion-label>
     		<ion-input type="text"
-    		[(ngModel)]="occName" ></ion-input>
+    		[(ngModel)]="person.occName" ></ion-input>
+    	</ion-item>
+      <ion-item >
+        <ion-label>Amount </ion-label>
+    		<ion-input type="number"
+    		[(ngModel)]="person.amount" ></ion-input>
     	</ion-item>
     </ion-list>
 	<ion-list style="border: 1px solid #5165c6;">
