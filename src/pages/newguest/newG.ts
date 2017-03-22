@@ -62,7 +62,7 @@ export class NewGuest {
         data => {
         	console.log('data ::::::',data);
           this.person = {base64Image: '', name: '', fName:'', gender:'select',address:'',pin:'',aadharNo:'',phone:'',fphone:'',occupation:'select',occName:'',amount:0};
-          this.navCtrl.push(SuccessPage,{guestId: data.id});
+          this.navCtrl.push(SuccessPage,{guestId: data.guestId});
         },
         err => {
             console.log(err);

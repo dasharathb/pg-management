@@ -28,10 +28,25 @@ export class AuthService {
     } else {
       return Observable.create(observer => {
         // At this point make a request to your backend to make a real check!
-        let access = (credentials.password === "pass" && credentials.phone === "9966711772");
-        this.currentUser = new User('Simon', '9966711772', 'saimon@devdactic.com');
-        observer.next(access);
-        observer.complete();
+        var url = 'http://localhost:9080/pg-management/get/user/'+credentials.phone+'/'+credentials.password;
+        this.http.get(url).map(res => res.json()).subscribe(success => {
+
+          console.log('success ::::::::::::::: ',success);
+          if (success) {
+
+            let access = true;// (credentials.password === "pass" && credentials.phone === "9966711772");
+            this.currentUser = new User(success.name, success.phone, success.email);
+            observer.next(access);
+            observer.complete();
+          } else {
+            return Observable.throw("Please insert credentials");
+          }
+        },
+        error => {
+          return Observable.throw("Please insert credentials");
+        });
+
+
       });
     }
   }
@@ -40,18 +55,27 @@ export class AuthService {
     if (credentials.phone === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
+    console.log('service  :::::::::::: ',credentials);
       // At this point store the credentials to your backend!
       var url = 'http://localhost:9080/pg-management/user/register';
       let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
       let options       = new RequestOptions({ headers: headers });
-      var response = this.http.post(url, JSON.stringify(credentials), options).map(res => res.json());
-      //return response;
 
+      var response = this.http.post(url, JSON.stringify(credentials), options).map(res => res.json());
+
+      return response;
+
+      /*return Observable.create(observer => {
+        observer.next(true);
+        observer.complete();
+      });*/
+    }
+  }
+  public addUserToLocalStorage(user){
       return Observable.create(observer => {
         observer.next(true);
         observer.complete();
       });
-    }
   }
 
   public getUserInfo() : User {

@@ -8,36 +8,36 @@
 
 <ion-content padding>
     <ion-row class="">
-      <ion-label item-left>Total Guests : 35</ion-label>
-      <ion-label item-right>Prasent Guests : 30</ion-label>
+      <ion-label item-left>Total Guests : {{totalGuests}}</ion-label>
+      <ion-label item-right>Present Guests : {{presentGuests}}</ion-label>
     </ion-row>
 
   <div id="feeDtl">
     <ion-label item-left>Fee Due Details</ion-label>
   </div>
 
-  <ion-card>
+  <ion-card *ngFor="let guest of feeDueGuests">
     <div id="homeCard" class="">
       <ion-list class="inline_width">
         <ion-item>
           <ion-avatar>
-  		      <img [src]="base64Image" width="100" height="100" (click)="openGuest('G0001');" />
+  		      <img [src]="guest.guests.base64Image" width="100" height="100" (click)="guestInfo(guest.guests.guestId);" />
   			       <!-- <a href="javascript:void(0);" (click)="takePicture()">Take Photo</a> -->
   		    </ion-avatar>
         </ion-item>
         <ion-item>
-          <ion-label >Dasharath Bhukya</ion-label>
+          <ion-label >{{guest.guests.name}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-label >Rs. 3200</ion-label>
+          <ion-label >Rs. {{guest.guests.amount}}</ion-label>
         </ion-item>
         <ion-item>
-          <ion-icon [hidden]="!openPannel" ios="ios-arrow-dropdown" md="md-arrow-dropdown" (click)="openPan('G0001');" > </ion-icon>
-          <ion-icon [hidden]="openPannel" ios="ios-arrow-dropup" md="md-arrow-dropup" (click)="openPan('');" > </ion-icon>
+          <ion-icon [hidden]="openPannelName == guest.guests.guestId" ios="ios-arrow-dropdown" md="md-arrow-dropdown" (click)="openPan(guest.guests.guestId);" > </ion-icon>
+          <ion-icon [hidden]="openPannelName != guest.guests.guestId" ios="ios-arrow-dropup" md="md-arrow-dropup" (click)="openPan('');" > </ion-icon>
         </ion-item>
       </ion-list>
     </div>
-    <ion-row *ngIf="openPannelName == 'G0001'">
+    <ion-row *ngIf="openPannelName == guest.guests.guestId">
       <ion-list class="inline_width" radio-group [(ngModel)]="feePaid">
         <!-- <ion-item >
           <ion-radio value="fPaid"></ion-radio>

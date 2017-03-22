@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {Camera} from 'ionic-native';
 import { GuestService } from '../../providers/guest-service';
 
 
