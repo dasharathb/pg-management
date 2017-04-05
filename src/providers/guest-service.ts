@@ -56,4 +56,11 @@ export class GuestService {
             return response;
           }
 
+        public feePaid(userPhone, guestId, amount){
+            var url = 'http://localhost:9080/pg-management/api/fee/paid/'+userPhone+'/'+guestId+'/'+amount;
+
+            var response = this.http.get(url).map(res => res.json());
+            return response;
+        }
+
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController, Loading } from 'ionic-angular';
+import {Device} from 'ionic-native';
+import { NavController, AlertController, LoadingController, Loading, Platform } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { RegisterPage } from '../register/register';
 import { HomePage } from '../home/home';
@@ -10,9 +11,17 @@ import { HomePage } from '../home/home';
 })
 export class LoginPage {
   loading: Loading;
-  registerCredentials = {phone: '', password: ''};
+  registerCredentials = {phone: '', password: '', deviceId: ''};
+  public deviceUUId : any;
 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {}
+  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private platform: Platform) {
+    platform.ready().then(() => {
+       console.log('Device:::::::::::::::',Device.uuid);
+       this.deviceUUId = Device.uuid;
+       this.registerCredentials.deviceId = Device.uuid;
+       this.registerCredentials.deviceId = 'ddvc1234r';
+      });
+  }
 
   public createAccount() {
     this.nav.push(RegisterPage);

@@ -14,6 +14,9 @@ public guests : any;
 public username = '';
 public email = '';
 public userPhone = '';
+totalGuests = 0;
+presentGuests = 0;
+
   constructor(public navCtrl: NavController, private auth: AuthService, private guestService: GuestService) {
     let info = this.auth.getUserInfo();
     console.log('info new guest.....',info);
@@ -50,6 +53,20 @@ public userPhone = '';
   guestInfo(guestId){
   console.log('guestId ::::::::::::::::::::::: ',guestId);
     this.navCtrl.push(Guest,{userPhone: this.userPhone, guestId: guestId});
+  }
+  getGuestCount(){
+
+    this.guestService.getGuestCount(this.userPhone).subscribe(
+        data => {
+          console.log('data ::::::',data);
+          this.totalGuests = data.totalGuests;
+          this.presentGuests = data.presentGuests;
+        },
+        err => {
+            console.log(err);
+        },
+        () => console.log('get guest count completed')
+    );
   }
 
 }
