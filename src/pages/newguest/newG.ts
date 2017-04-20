@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import {Camera} from 'ionic-native';
 import { AuthService } from '../../providers/auth-service';
 import { GuestService } from '../../providers/guest-service';
 import { LoginPage } from '../login/login';
-import { SuccessPage } from '../success/success';
+//import { SuccessPage } from '../success/success';
 
 @Component({
   selector: 'new-guest',
@@ -20,7 +20,7 @@ export class NewGuest {
   public username = '';
   public email = '';
   public userPhone = '';
-  constructor(public navCtrl: NavController, private auth: AuthService, private guestService: GuestService) {
+  constructor(public navCtrl: NavController, private auth: AuthService, private guestService: GuestService, private alertCtrl: AlertController) {
       let info = this.auth.getUserInfo();
     console.log('info new guest.....',info);
     if(info == undefined){
@@ -62,7 +62,8 @@ export class NewGuest {
         data => {
         	console.log('data ::::::',data);
           this.person = {base64Image: '', name: '', fName:'', gender:'select',address:'',pin:'',aadharNo:'',phone:'',fphone:'',occupation:'select',occName:'',amount:0};
-          this.navCtrl.push(SuccessPage,{guestId: data.guestId});
+          //this.navCtrl.push(SuccessPage,{guestId: data.guestId});
+          this.showAlert(data.guestId);
         },
         err => {
             console.log(err);
@@ -70,5 +71,16 @@ export class NewGuest {
         () => console.log('Search Complete')
     );
   }
+  showAlert(text) {
+  /*  setTimeout(() => {
+      this.loading.dismiss();
+    }); */
 
+    let alert = this.alertCtrl.create({
+      title: 'Guest Created',
+      subTitle: text,
+      buttons: ['OK']
+    });
+    alert.present(prompt);
+  }
 }

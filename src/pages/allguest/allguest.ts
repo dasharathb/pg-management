@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { GuestService } from '../../providers/guest-service';
 import { LoginPage } from '../login/login';
 import { Guest } from '../guest-info/guest';
+import { InOut } from '../inout/inout';
 
 @Component({
   selector: 'all-guest',
@@ -17,7 +18,7 @@ public userPhone = '';
 totalGuests = 0;
 presentGuests = 0;
 
-  constructor(public navCtrl: NavController, private auth: AuthService, private guestService: GuestService) {
+  constructor(public navCtrl: NavController, private auth: AuthService, private guestService: GuestService, private alertCtrl: AlertController) {
     let info = this.auth.getUserInfo();
     console.log('info new guest.....',info);
     if(info == undefined){
@@ -69,4 +70,60 @@ presentGuests = 0;
     );
   }
 
+  openResionPop(guestId){
+    console.log('open pop::::::',guestId);
+    this.navCtrl.push(InOut,{guestId: guestId});
+    //this.presentPrompt();
+  }
+
+  presentPrompt() {
+  let alert = this.alertCtrl.create({
+    title: 'IN / OUT',
+
+    inputs: [
+      {
+        type: 'radio',
+        value: 'P',
+        label: 'Present'
+      },
+      {
+        value: 'A',
+        label: 'Absent',
+        type: 'radio'
+      },
+      {
+        value: 'L',
+        label: 'Left',
+        type: 'radio'
+      },
+      {
+        type: 'text',
+        name: 'reason',
+        placeholder: 'Reason'
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Login',
+        handler: data => {
+          console.log(data);
+          //if (User.isValid(data.username, data.password)) {
+            // logged in!
+          //} else {
+            // invalid login
+            return true;
+        //  }
+        }
+      }
+    ]
+  });
+  alert.present();
+}
 }

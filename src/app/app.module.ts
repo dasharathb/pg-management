@@ -10,7 +10,7 @@ import { LoginPage } from '../pages/login/login';
 import { AuthService } from '../providers/auth-service';
 import { GuestService } from '../providers/guest-service';
 import { RegisterPage } from '../pages/register/register';
-import { SuccessPage } from '../pages/success/success';
+import { InOut } from '../pages/inout/inout';
 import { Guest } from '../pages/guest-info/guest';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { Guest } from '../pages/guest-info/guest';
     NewGuest,
     LoginPage,
     RegisterPage,
-    SuccessPage,
+    InOut,
     Guest
   ],
   imports: [
@@ -39,7 +39,7 @@ import { Guest } from '../pages/guest-info/guest';
     NewGuest,
     LoginPage,
     RegisterPage,
-    SuccessPage,
+    InOut,
     Guest
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, AuthService, GuestService]

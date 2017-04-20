@@ -23,7 +23,7 @@
           </ion-avatar>
         </ion-item>
         <ion-item>
-          <ion-label >{{guest.name}}</ion-label>
+          <ion-label ><a (click)="openResionPop(guest.guestId);" >{{guest.name}}</a></ion-label>
         </ion-item>
         <ion-item>
           <ion-label >{{guest.phone}}</ion-label>

@@ -9,7 +9,7 @@
 <ion-content padding>
   <ion-card>
     <div id="homeCard" class="" >
-      <ion-list class="inline_width">
+       <ion-list class=""> <!--inline_width -->
         <ion-item>
           <ion-avatar>
             <!-- (click)="openGuest(guest.id);" -->
@@ -17,10 +17,28 @@
           </ion-avatar>
         </ion-item>
         <ion-item>
-          <ion-label >{{guest.name}}</ion-label>
+          <ion-label >Guest Id : <font style="font-size: 16px;" >{{guest.guestId}}</font></ion-label>
         </ion-item>
         <ion-item>
-          <ion-label >{{guest.phone}}</ion-label>
+          <ion-label >Name : <font style="font-size: 16px;">{{guest.name}}</font></ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label >Father Name : <font style="font-size: 16px;" >{{guest.fName}}</font></ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label >Gender : <font style="font-size: 16px;" >{{guest.gender}}</font></ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label >Address : <font style="font-size: 16px;" >{{guest.address}}</font></ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label >Phone # : <font style="font-size: 16px;" >{{guest.phone}}</font></ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label >Father Phone # : <font style="font-size: 16px;" >{{guest.fphone}}</font></ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label >Joined Date : <font style="font-size: 16px;" >{{guest.joinDate | date: 'dd-MM-yyyy'}}</font></ion-label>
         </ion-item>
       </ion-list>
     </div>

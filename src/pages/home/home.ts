@@ -25,11 +25,11 @@ export class HomePage {
   constructor(public navCtrl: NavController, private auth: AuthService, private guestService: GuestService, private platform: Platform) {
 
       platform.ready().then(() => {
-         console.log('Device:::::::::::::::',Device.uuid);
-         //this.deviceUUId = Device.uuid;
-          this.deviceUUId = 'ddvc1234r';
+        // console.log('Device:::::::::::::::',Device.uuid);
+         this.deviceUUId = Device.uuid;
+        //  this.deviceUUId = 'ddvc1234r';
          this.auth.getUserDtl(this.deviceUUId).subscribe(succ => {
-            console.log('succ:::::::::::::::',succ);
+          //  console.log('succ:::::::::::::::',succ);
             if(succ.name)
               this.auth.setUserInfo(succ);
 

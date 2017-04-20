@@ -20,8 +20,8 @@ export class RegisterPage {
 
   public register() {
   console.log('this.registerCredentials :::::::::::: ',this.registerCredentials);
-    //this.registerCredentials.deviceId = this.deviceUUId;
-    this.registerCredentials.deviceId = 'ddvc1234r';
+    this.registerCredentials.deviceId = this.deviceUUId;
+    //this.registerCredentials.deviceId = 'ddvc1234r';
     console.log('this.registerCredentials :::::::::::::: ',this.registerCredentials);
     this.auth.register(this.registerCredentials).subscribe(success => {
 
