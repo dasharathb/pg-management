@@ -65,6 +65,7 @@
           <ion-option value="select" >--select--</ion-option>
           <ion-option value="student">Student</ion-option>
           <ion-option value="working">Working</ion-option>
+          <ion-option value="nonworking">Non Working</ion-option>
         </ion-select>
     	</ion-item>
       <ion-item *ngIf="person.occupation == 'student'">
@@ -83,12 +84,12 @@
     		[(ngModel)]="person.amount" ></ion-input>
     	</ion-item>
     </ion-list>
-	<ion-list style="border: 1px solid #5165c6;">
+	<ion-list >
 		<ion-item>
 			<button ion-button (click)="addGuest();">
 				<!-- <ion-icon ios="ios-add" md="md-add">
 				</ion-icon> -->
-        Save Guest
+        Save New Guest
 			</button>
 		</ion-item>
 	</ion-list>
