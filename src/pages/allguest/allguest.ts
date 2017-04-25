@@ -20,7 +20,6 @@ presentGuests = 0;
 
   constructor(public navCtrl: NavController, private auth: AuthService, private guestService: GuestService, private alertCtrl: AlertController) {
     let info = this.auth.getUserInfo();
-    console.log('info new guest.....',info);
     if(info == undefined){
       this.navCtrl.push(LoginPage);
     }else{
@@ -34,15 +33,12 @@ presentGuests = 0;
   	this.allGuests();
   }
   ionViewWillEnter(){
-  console.log('this.allGuests() ::::::::::: ')
     this.allGuests();
   }
   allGuests(){
-    console.log(this.username,':::::::person details::::::',this.userPhone);
     this.guestService.getGuests(this.userPhone).subscribe(
         data => {
-        	console.log('data ::::::',data.guests);
-          this.guests = data.guests;
+        	this.guests = data.guests;
         },
         err => {
             console.log(err);
@@ -52,14 +48,12 @@ presentGuests = 0;
   }
 
   guestInfo(guestId){
-  console.log('guestId ::::::::::::::::::::::: ',guestId);
     this.navCtrl.push(Guest,{userPhone: this.userPhone, guestId: guestId});
   }
   getGuestCount(){
 
     this.guestService.getGuestCount(this.userPhone).subscribe(
         data => {
-          console.log('data ::::::',data);
           this.totalGuests = data.totalGuests;
           this.presentGuests = data.presentGuests;
         },
@@ -71,9 +65,9 @@ presentGuests = 0;
   }
 
   openResionPop(guestId){
-    console.log('open pop::::::',guestId);
+
     this.navCtrl.push(InOut,{guestId: guestId});
-    //this.presentPrompt();
+
   }
 
   presentPrompt() {

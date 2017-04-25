@@ -17,7 +17,7 @@ export class AboutPage {
         this.navCtrl.push(LoginPage);
       }else{
         this.user = info;
-        console.log('this.user :::::::::: ',this.user);
+
       }
   }
 

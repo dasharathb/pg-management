@@ -22,8 +22,7 @@ export class Guest {
   getGuest(){
     this.guestService.getGuestInfo(this.userPhone, this.guestId).subscribe(
         data => {
-        	console.log('data.guest-info ::::::',data);
-          this.guest = data;
+        	this.guest = data;
         },
         err => {
             console.log(err);

@@ -13,18 +13,13 @@ export class RegisterPage {
   public deviceUUId : any;
   constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private platform: Platform) {
     platform.ready().then(() => {
-       console.log('Device:::::::::::::::',Device.uuid);
        this.deviceUUId = Device.uuid;
     });
   }
 
   public register() {
-  console.log('this.registerCredentials :::::::::::: ',this.registerCredentials);
     this.registerCredentials.deviceId = this.deviceUUId;
-    //this.registerCredentials.deviceId = 'ddvc1234r';
-    console.log('this.registerCredentials :::::::::::::: ',this.registerCredentials);
     this.auth.register(this.registerCredentials).subscribe(success => {
-
     this.auth.addUserToLocalStorage(this.registerCredentials).subscribe(success => {
       if (success) {
         this.createSuccess = true;

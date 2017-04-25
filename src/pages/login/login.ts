@@ -16,10 +16,9 @@ export class LoginPage {
 
   constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private platform: Platform) {
     platform.ready().then(() => {
-       //console.log('Device:::::::::::::::',Device.uuid);
        this.deviceUUId = Device.uuid;
        this.registerCredentials.deviceId = Device.uuid;
-       //this.registerCredentials.deviceId = 'ddvc1234r';
+
       });
   }
 

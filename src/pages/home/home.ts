@@ -25,16 +25,13 @@ export class HomePage {
   constructor(public navCtrl: NavController, private auth: AuthService, private guestService: GuestService, private platform: Platform) {
 
       platform.ready().then(() => {
-        // console.log('Device:::::::::::::::',Device.uuid);
+
          this.deviceUUId = Device.uuid;
-        //  this.deviceUUId = 'ddvc1234r';
          this.auth.getUserDtl(this.deviceUUId).subscribe(succ => {
-          //  console.log('succ:::::::::::::::',succ);
-            if(succ.name)
-              this.auth.setUserInfo(succ);
+         if(succ.name)
+            this.auth.setUserInfo(succ);
 
            let info = this.auth.getUserInfo();
-           console.log('info.....',info);
            if(info == undefined){
              this.navCtrl.push(LoginPage);
            }else{
@@ -63,7 +60,6 @@ export class HomePage {
   }
 
   openPan(pName){
-    //alert(pName);
     this.openPannel = !this.openPannel;
     this.openPannelName = pName;
   }
@@ -72,7 +68,6 @@ export class HomePage {
 
     this.guestService.getGuestCount(this.userPhone).subscribe(
         data => {
-          console.log('data ::::::',data);
           this.totalGuests = data.totalGuests;
           this.presentGuests = data.presentGuests;
         },
@@ -86,7 +81,6 @@ export class HomePage {
   getFeeDueInfo(){
     this.guestService.getFeeDueInfo(this.userPhone).subscribe(
         data => {
-          console.log('data :: person::::',data);
           this.feeDueGuests = data;
           if(this.feeDueGuests.length == 0){
             this.noData = true;
@@ -99,15 +93,11 @@ export class HomePage {
     );
   }
   guestInfo(guestId){
-  console.log('guestId ::::::::::::::::::::::: ',guestId);
-    this.navCtrl.push(Guest,{userPhone: this.userPhone, guestId: guestId});
+      this.navCtrl.push(Guest,{userPhone: this.userPhone, guestId: guestId});
   }
   feePaid(guestId, amount){
-    console.log('guestId amount::::::::', guestId, amount);
-    console.log('this.userPhone:::::::::::::::',this.userPhone, );
     this.guestService.feePaid(this.userPhone, guestId, amount).subscribe(
         data => {
-          console.log('data :: fee paid::::',data);
           this.feeDueGuests = data;
           if(this.feeDueGuests.length == 0){
             this.noData = true;

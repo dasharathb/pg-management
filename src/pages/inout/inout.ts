@@ -3,7 +3,6 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { LoginPage } from '../login/login';
 import { GuestService } from '../../providers/guest-service';
-import { AllGuest } from '../allguest/allguest';
 
 @Component({
   selector: 'page-inout',
@@ -31,28 +30,12 @@ export class InOut {
       alert('data saved');
       this.guestService.updateGuestInOutInfo(this.reason, this.userPhone, this.guestId).subscribe(
           data => {
-          	//console.log('data ::::::',data);
-            //this.showAlert();
-            //this.navCtrl.push(AllGuest);
-            this.navCtrl.pop();
+              this.navCtrl.pop();
           },
           err => {
               console.log(err);
           },
           () => console.log('Search Complete')
       );
-  }
-
-  showAlert() {
-  /*  setTimeout(() => {
-      this.loading.dismiss();
-    }); */
-
-    let alert = this.alertCtrl.create({
-      title: 'Status',
-      subTitle: "status update.",
-      buttons: ['OK']
-    });
-    alert.present(prompt);
   }
 }

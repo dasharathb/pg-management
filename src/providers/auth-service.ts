@@ -35,14 +35,11 @@ export class AuthService {
     } else {
       return Observable.create(observer => {
         // At this point make a request to your backend to make a real check!
-        //var url = 'http://localhost:9080/pg-management/get/user/'+credentials.phone+'/'+credentials.password+'/'+credentials.deviceId;
-        //var url = 'http://183.83.128.106:9080/pg-management/get/user/'+credentials.phone+'/'+credentials.password+'/'+credentials.deviceId;
+
         var url = ApiUrl.API_ENDPOINT+'/get/user/'+credentials.phone+'/'+credentials.password+'/'+credentials.deviceId;
         this.http.get(url).map(res => res.json()).subscribe(success => {
 
-        //  console.log('success ::::::::::::::: ',success);
           if (success) {
-
             let access = true;// (credentials.password === "pass" && credentials.phone === "9966711772");
             this.currentUser = new User(success.name, success.phone, success.email, success.password, success.hFee, success.deviceId);
             observer.next(access);
@@ -64,10 +61,8 @@ export class AuthService {
     if (credentials.phone === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
-    //console.log('service  :::::::::::: ',credentials);
       // At this point store the credentials to your backend!
-      //var url = 'http://localhost:9080/pg-management/user/register';
-      //var url = 'http://183.83.128.106:9080/pg-management/user/register';
+
       var url = ApiUrl.API_ENDPOINT+'/user/register';
       let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
       let options       = new RequestOptions({ headers: headers });
@@ -76,10 +71,6 @@ export class AuthService {
 
       return response;
 
-      /*return Observable.create(observer => {
-        observer.next(true);
-        observer.complete();
-      });*/
     }
   }
   public addUserToLocalStorage(user){
@@ -90,13 +81,10 @@ export class AuthService {
   }
 
   public getUserDtl(deviceUUId) {
-    //var url = 'http://localhost:9080/pg-management/user/'+deviceUUId;
-    //var url = 'http://183.83.128.106:9080/pg-management/user/'+deviceUUId;
-    var url = ApiUrl.API_ENDPOINT+'/user/'+deviceUUId;
-                   //this.http.get(url).map(res => res.json())
-    var response = this.http.get(url).map(res => res.json());
-  //  console.log('getUserDtl ::: response:::::::::::::::::::::::::::::::',response);
 
+    var url = ApiUrl.API_ENDPOINT+'/user/'+deviceUUId;
+                   
+    var response = this.http.get(url).map(res => res.json());
 
     return response;
   }
