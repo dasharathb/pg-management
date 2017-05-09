@@ -50,11 +50,18 @@ export class GuestService {
         }
 
         public updateGuestInOutInfo(reason, phone, guestId){
-            
+
             var url = ApiUrl.API_ENDPOINT+'/api/in/out/'+phone+'/'+guestId;
             let headers      = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
             let options       = new RequestOptions({ headers: headers });
             var response = this.http.put(url, JSON.stringify(reason), options).map(res => res.json());
             return response;
         }
+
+        public searchGuest(userPhone, nameorId) {
+
+              var url = ApiUrl.API_ENDPOINT+'/api/guests/search/'+userPhone+'/'+nameorId;
+              var response = this.http.get(url).map(res => res.json());
+              return response;
+          }
 }

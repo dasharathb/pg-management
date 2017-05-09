@@ -24,9 +24,24 @@
             <ion-label>Fee : <font class="lbl_font" >{{user.hFee}}</font></ion-label>
           </ion-item>
           <ion-item>
-            <a href="javascript:"  >edit details </a>
+            <a href="javascript:" (click)="edit = true;" >edit fee</a>
           </ion-item>
 
+        </ion-list>
+        <ion-list>
+          <ion-item *ngIf = "edit === true">
+            <ion-input type="number" placeholder="Hostel Fee" name="hFee" [(ngModel)]="hFee" required></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-list *ngIf = "edit === true">
+          <ion-item >
+            <button ion-button (click)="save();">
+      				Save
+      			</button>
+            <button ion-button (click)="cancel();">
+      				Cancel
+      			</button>
+          </ion-item>
         </ion-list>
       </div>
     </ion-card>

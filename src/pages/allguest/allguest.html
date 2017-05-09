@@ -7,9 +7,13 @@
 </ion-header>
 
 <ion-content padding>
+    <div *ngIf="searching" class="spinner-container">
+        <ion-spinner></ion-spinner>
+    </div>
   <ion-card>
     <ion-card-header>
-      <ion-input type="text" placeholder="enter guest id" name="gid" [(ngModel)]="guestId" required></ion-input>
+      <!-- <ion-input type="text" placeholder="Id / Name" name="gid" [(ngModel)]="idorName" (ngModelChange)="search(idorName)" required></ion-input> -->
+      <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="search()"></ion-searchbar>
     </ion-card-header>
     <div id="homeCard" class=""  *ngFor="let guest of guests">
       <ion-list class="inline_width">

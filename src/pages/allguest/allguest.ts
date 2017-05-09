@@ -17,6 +17,8 @@ public email = '';
 public userPhone = '';
 totalGuests = 0;
 presentGuests = 0;
+searchTerm: string = '';
+searching: any = false;
 
   constructor(public navCtrl: NavController, private auth: AuthService, private guestService: GuestService, private alertCtrl: AlertController) {
     let info = this.auth.getUserInfo();
@@ -39,12 +41,34 @@ presentGuests = 0;
     this.guestService.getGuests(this.userPhone).subscribe(
         data => {
         	this.guests = data.guests;
+          this.searching = false;
         },
         err => {
             console.log(err);
+            this.searching = false;
         },
         () => console.log('Search Complete')
     );
+  }
+
+  search(){
+    this.searching = true;
+    console.log('searchTerm::::::::::::::',this.searchTerm);
+    if(this.searchTerm === ''){
+      this.allGuests();
+    } else {
+      this.guestService.searchGuest(this.userPhone, this.searchTerm).subscribe(
+          data => {
+            this.guests = data.guests;
+            this.searching = false;
+          },
+          err => {
+              console.log(err);
+              this.searching = false;
+          },
+          () => console.log('Search Complete')
+      );
+    }
   }
 
   guestInfo(guestId){

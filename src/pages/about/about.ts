@@ -10,7 +10,7 @@ import { LoginPage } from '../login/login';
 })
 export class AboutPage {
   private user : any;
-
+  public edit : false;
   constructor(public navCtrl: NavController, private auth: AuthService) {
       let info = this.auth.getUserInfo();
       if(info == undefined){
@@ -19,6 +19,13 @@ export class AboutPage {
         this.user = info;
 
       }
+  }
+
+  save(){
+    //console.log('saved......');
+  }
+  cancel(){
+    this.edit = false;
   }
 
 }
