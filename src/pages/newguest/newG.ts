@@ -34,7 +34,13 @@ export class NewGuest {
     if(number.length==10 && event.keyCode!=8)
       return false;
   }
+  takePhoto(pictureSourceType) {
+      this.takeThePhoto(navigator.camera.PictureSourceType.CAMERA);
+  }
 
+  pickImage() {
+      this.takeThePhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);
+  }
   takePicture(){
     Camera.getPicture({
         destinationType: Camera.DestinationType.DATA_URL,
@@ -52,6 +58,66 @@ export class NewGuest {
         console.log(err);
     });
   }
+/********************************/
+  takeThePhoto(pictureSourceType) {
+        Camera.getPicture({
+            sourceType: pictureSourceType,
+            destinationType: Camera.DestinationType.FILE_URI,
+            quality: 50,
+            targetWidth: 720,
+            correctOrientation: true,
+            encodingType: Camera.EncodingType.JPEG
+        })
+            .then(
+            imageURI => {
+                window['plugins'].crop.promise(imageURI, {
+                    quality: 75
+                }).then(newPath => {
+                        return this.toBase64(newPath).then((base64Img) => {
+                            //this.base64Image = base64Img;
+                            this.person.base64Image = base64Img;
+                        });
+                    },
+                    error => {
+                        console.log("CROP ERROR -> " + JSON.stringify(error));
+                        alert("CROP ERROR: " + JSON.stringify(error));
+                    }
+                    );
+            },
+            error => {
+                console.log("CAMERA ERROR -> " + JSON.stringify(error));
+                alert("CAMERA ERROR: " + JSON.stringify(error));
+            }
+            );
+    }
+
+    toBase64(url: string) {
+        return new Promise<string>(function (resolve) {
+            var xhr = new XMLHttpRequest();
+            xhr.responseType = 'blob';
+            xhr.onload = function () {
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                    resolve(reader.result);
+                }
+                reader.readAsDataURL(xhr.response);
+            };
+            xhr.open('GET', url);
+            xhr.send();
+        });
+    }
+
+    resize(base64Img, width, height) {
+        var img = new Image();
+        img.src = base64Img;
+        var canvas = document.createElement('canvas'),ctx = canvas.getContext('2d');
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(img, 0, 0, width, height);
+        return canvas.toDataURL("image/jpeg");
+    }
+
+    /********************************/
 
   addGuest(){
     this.guestService.registerGuest(this.person, this.userPhone).subscribe(
