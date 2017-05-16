@@ -35,13 +35,31 @@ export class NewGuest {
       return false;
   }
   takePhoto(pictureSourceType) {
-      this.takeThePhoto(navigator.camera.PictureSourceType.CAMERA);
+      this.takePicture(Camera.PictureSourceType.CAMERA);
   }
 
   pickImage() {
-      this.takeThePhoto(navigator.camera.PictureSourceType.SAVEDPHOTOALBUM);
+      this.takePicture(Camera.PictureSourceType.SAVEDPHOTOALBUM);
   }
-  takePicture(){
+  takePicture(pictureSourceType){
+    Camera.getPicture({
+        sourceType: pictureSourceType,
+        destinationType: Camera.DestinationType.DATA_URL,
+        targetWidth: 1000,
+        targetHeight: 1000
+    }).then((imageData) => {
+
+  /*  quality: 75,
+      targetWidth: 320,
+      targetHeight: 320,
+      saveToPhotoAlbum: false*/
+      // imageData is a base64 encoded string
+        this.person.base64Image = "data:image/jpeg;base64," + imageData;
+    }, (err) => {
+        console.log(err);
+    });
+  }
+  takePicture_old(){
     Camera.getPicture({
         destinationType: Camera.DestinationType.DATA_URL,
         targetWidth: 1000,
@@ -59,14 +77,14 @@ export class NewGuest {
     });
   }
 /********************************/
+//FILE_URI
   takeThePhoto(pictureSourceType) {
         Camera.getPicture({
             sourceType: pictureSourceType,
-            destinationType: Camera.DestinationType.FILE_URI,
+            destinationType: Camera.DestinationType.DATA_URL,
             quality: 50,
-            targetWidth: 720,
-            correctOrientation: true,
-            encodingType: Camera.EncodingType.JPEG
+            targetWidth: 1000,
+            targetHeight:1000
         })
             .then(
             imageURI => {
@@ -75,7 +93,7 @@ export class NewGuest {
                 }).then(newPath => {
                         return this.toBase64(newPath).then((base64Img) => {
                             //this.base64Image = base64Img;
-                            this.person.base64Image = base64Img;
+                            this.person.base64Image = "data:image/jpeg;base64," + base64Img;
                         });
                     },
                     error => {
