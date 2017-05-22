@@ -14,7 +14,7 @@ export class NewGuest {
   public base64Image: string;
   public name: string;
   public fName: string;
-	public person = {base64Image: '', name: '', fName:'', gender:'select',address:'',pin:'',aadharNo:'',phone:'',fphone:'',occupation:'select',occName:'',amount:0};
+	public person = {base64Image: '', name: '', fName:'', gender:'select',address:'',pin:'',aadharNo:'',phone:'',fphone:'',occupation:'select',occName:'', joinDate:''};
 
   public username = '';
   public email = '';
@@ -140,7 +140,7 @@ export class NewGuest {
   addGuest(){
     this.guestService.registerGuest(this.person, this.userPhone).subscribe(
         data => {
-        	this.person = {base64Image: '', name: '', fName:'', gender:'select',address:'',pin:'',aadharNo:'',phone:'',fphone:'',occupation:'select',occName:'',amount:0};
+        	this.person = {base64Image: '', name: '', fName:'', gender:'select',address:'',pin:'',aadharNo:'',phone:'',fphone:'',occupation:'select',occName:'', joinDate:''};
           this.showAlert(data.guestId);
         },
         err => {

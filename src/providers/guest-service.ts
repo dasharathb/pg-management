@@ -63,5 +63,10 @@ export class GuestService {
               var url = ApiUrl.API_ENDPOINT+'/api/guests/search/'+userPhone+'/'+nameorId;
               var response = this.http.get(url).map(res => res.json());
               return response;
-          }
+        }
+        public updateFee(userPhone, hFee){
+              var url = ApiUrl.API_ENDPOINT+'/api/hostel/fee/'+userPhone+'/'+hFee;
+              var response = this.http.get(url).map(res => res.json());
+              return response;
+        }
 }

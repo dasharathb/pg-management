@@ -21,11 +21,14 @@
             <ion-label>Email Id : <font class="lbl_font" >{{user.email}}</font></ion-label>
           </ion-item>
           <ion-item>
-            <ion-label>Fee : <font class="lbl_font" >{{user.hFee}}</font></ion-label>
+            <ion-label>Fee :
+              <font class="lbl_font" >{{user.hFee}}</font>
+              <a href="javascript:" class="marginl5" (click)="edit = true;" >edit fee</a>
+            </ion-label>
           </ion-item>
-          <ion-item>
+          <!-- <ion-item>
             <a href="javascript:" (click)="edit = true;" >edit fee</a>
-          </ion-item>
+          </ion-item> -->
 
         </ion-list>
         <ion-list>

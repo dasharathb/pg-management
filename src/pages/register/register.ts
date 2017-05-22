@@ -22,6 +22,10 @@ export class RegisterPage {
     this.auth.register(this.registerCredentials).subscribe(success => {
     this.auth.addUserToLocalStorage(this.registerCredentials).subscribe(success => {
       if (success) {
+        this.auth.getUserDtl(this.deviceUUId).subscribe(succ => {
+          if(succ.name)
+            this.auth.setUserInfo(succ);
+         });
         this.createSuccess = true;
           this.showPopup("Success", "Account created.");
       } else {

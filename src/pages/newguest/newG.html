@@ -65,7 +65,7 @@
           <ion-option value="select" >--select--</ion-option>
           <ion-option value="student">Student</ion-option>
           <ion-option value="working">Working</ion-option>
-          <ion-option value="nonworking">Non Working</ion-option>
+          <ion-option value="non-working">Non Working</ion-option>
         </ion-select>
     	</ion-item>
       <ion-item *ngIf="person.occupation == 'student'">
@@ -77,6 +77,11 @@
         <ion-label>Organization </ion-label>
     		<ion-input type="text"
     		[(ngModel)]="person.occName" ></ion-input>
+    	</ion-item>
+      <ion-item >
+        <ion-label>Joining Date </ion-label>
+    		<ion-input type="date"
+    		[(ngModel)]="person.joinDate" ></ion-input>
     	</ion-item>
      <!-- <ion-item >
         <ion-label>Amount </ion-label>
